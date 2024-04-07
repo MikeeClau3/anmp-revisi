@@ -13,7 +13,7 @@ import com.example.a160421137_studentapp.viewmodel.filmViewModel
 class filmListFragment : Fragment() {
     private lateinit var binding: FragmentFilmListBinding
     private lateinit var viewModel: filmViewModel
-    private val filmListAdapter = filmListAdapter(arrayListOf())
+//    private val filmListAdapter = filmListAdapter(arrayListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

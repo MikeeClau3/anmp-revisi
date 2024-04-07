@@ -10,6 +10,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.a160421137_studentapp.model.Student
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
+import com.google.gson.Gson
 
 class ListViewModel(application: Application): AndroidViewModel(application) {
     var studentsLD = MutableLiveData<ArrayList<Student>>()
@@ -40,10 +41,10 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
             Request.Method.GET,
             url, {
 
-//                val sType = object : TypeToken<List<Student>>() {}.type
-//                val result = Gson().fromJson<List<Student>>(it, sType)
-//                studentsLD.value = result as ArrayList<Student>?
-//
+                val sType = object : TypeToken<List<Student>>() {}.type
+                val result = Gson().fromJson<List<Student>>(it, sType)
+                studentsLD.value = result as ArrayList<Student>?
+
                 Log.d("showvolley", it)
                 loadingLD.value = false
 

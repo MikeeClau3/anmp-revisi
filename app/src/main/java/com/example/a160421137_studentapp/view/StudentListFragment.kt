@@ -16,6 +16,7 @@ import com.example.a160421137_studentapp.viewmodel.ListViewModel
 
 class StudentListFragment : Fragment() {
     // test
+    private  lateinit var viewModel: ListViewModel
     private lateinit var binding: FragmentStudentListBinding
     private val studentListAdapter = StudentListAdapter(arrayListOf())
 

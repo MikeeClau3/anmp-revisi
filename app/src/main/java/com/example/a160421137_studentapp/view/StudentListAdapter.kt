@@ -1,11 +1,16 @@
 package com.example.a160421137_studentapp.view
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a160421137_studentapp.databinding.StudentListItemBinding
 import com.example.a160421137_studentapp.model.Student
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class StudentListAdapter(val studentList: ArrayList<Student>)
     : RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
@@ -23,11 +28,26 @@ class StudentListAdapter(val studentList: ArrayList<Student>)
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         holder.binding.txtId.text = studentList[position].id
-        holder.binding.txtMake.text = studentList[position].name
+        holder.binding.txtName.text = studentList[position].name
         holder.binding.btnDetail.setOnClickListener {
             val action = StudentListFragmentDirections.actionStudentDetail()
             Navigation.findNavController(it).navigate(action)
         }
+
+        val picasso = Picasso.Builder(holder.itemView.context)
+        picasso.listener { picasso, uri, exception -> exception.printStackTrace()
+        }
+        picasso.build().load(
+            studentList[position].photoUrl).into(holder.binding.imgStudent, object :Callback{
+            override fun onSuccess() {
+                holder.binding.progressImage.visibility = View.INVISIBLE
+                holder.binding.imgStudent.visibility = View.VISIBLE
+            }
+
+            override fun onError(e: Exception?) {
+                Log.d("Cek", "error")
+            }
+            })
     }
 
     fun updateStudentList(newStudentList: ArrayList<Student>){
